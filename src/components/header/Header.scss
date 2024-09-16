@@ -1,0 +1,19 @@
+.header{
+  padding: 1rem 1.5rem;
+  height: 7.6rem;
+  background-color : #23B27C;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo{
+  height: 5rem;
+  width: 5rem;
+}
+
+.menu{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 15rem));
+
+}

@@ -1,0 +1,37 @@
+$font-h1: bold 4.2667rem "Roboto", sans-serif;
+$font-h2: 3.2rem bold "Roboto", sans-serif;
+$font-plain: 1.4rem  "Roboto", sans-serif;
+$font-link: 1.8667rem underlined "Roboto", sans-serif;
+$font-btn: 1.8667rem light "Roboto", sans-serif;
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 10px;
+}
+
+body{
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #303633;
+}
+
+h1{
+    font: $font-h1;
+    color: #303633;
+}
+button{
+    font: $font-btn;
+}
+
+p {
+    font: $font-plain;
+}
