@@ -1,6 +1,7 @@
 import "./OntologyMerging.scss";
 import {Button} from "@mui/material";
 import {useRef} from "react";
+import {uploadOntology} from "../../api/ontology.js";
 
 const OntologyMerging = () => {
     const fileInputRef = useRef(null);
@@ -9,12 +10,27 @@ const OntologyMerging = () => {
         fileInputRef.current.click();
     };
 
-    const handleFileChange = (event) => {
+
+    const handleFileChange = async (event) => {
         const file = event.target.files[0];
         if (!/.owx/i.test(file.name)){
             throw new Error("Incorrect file name");
         }
-        console.log(`Selected file: ${file.name}`);
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await uploadOntology(formData);
+            if (!response.ok) {
+                throw new Error('File upload failed');
+            }
+
+            const result = await response.json();
+            console.log(result);
+        }catch (error) {
+            console.error('Error:', error);
+        }
+        console.log(formData);
     };
     return (
         <div className="ontologyMerging">
