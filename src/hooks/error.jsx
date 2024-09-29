@@ -24,7 +24,12 @@ export const useError = () => {
       <Alert
         onClose={handleClose}
         severity='error'
-        sx={{ display: 'flex', alignItems: 'center', width: '100%' }}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '14px',
+          width: '100%',
+        }}
       >
         {errorMessage}
       </Alert>

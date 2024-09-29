@@ -10,7 +10,14 @@ import 'bpmn-js/dist/assets/bpmn-js.css';
 import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 import '@bpmn-io/properties-panel/assets/properties-panel.css';
 import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda';
-import { Alert, Box, Button, IconButton, Snackbar } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  CircularProgress,
+  IconButton,
+  Snackbar,
+} from '@mui/material';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import CreateIcon from '@mui/icons-material/Create';
@@ -34,6 +41,7 @@ const BPMNDiagram = ({ diagramXml, createNewMode }) => {
   const { showError, ErrorSnackbar } = useError();
   const [propPanelVisible, setPropPanelVisible] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
+  const [showProgress, setShowProgress] = useState(false);
 
   useEffect(() => {
     modelerRef.current = new BpmnModeler({
@@ -105,12 +113,15 @@ const BPMNDiagram = ({ diagramXml, createNewMode }) => {
   };
 
   const saveAndConvertToOwl = async () => {
+    setShowProgress(() => true);
     try {
       const { xml } = await modelerRef.current.saveXML({ format: true });
       const response = await sendXmlAndConvert(xml);
       await response.json();
+      setShowProgress(() => false);
       navigate('/scenario-converted');
     } catch (error) {
+      setShowProgress(() => false);
       handleNewError(error.message);
     }
   };
@@ -246,16 +257,23 @@ const BPMNDiagram = ({ diagramXml, createNewMode }) => {
             ref={propertiesPanelRef}
           />
         </div>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Button
-            variant='contained'
-            color='primary'
-            startIcon={<AccountTree />}
-            onClick={saveAndConvertToOwl}
-          >
-            Save and convert to OWL
-          </Button>
-        </Box>
+        {!showProgress && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Button
+              variant='contained'
+              color='primary'
+              startIcon={<AccountTree />}
+              onClick={saveAndConvertToOwl}
+            >
+              Save and convert to OWL
+            </Button>
+          </Box>
+        )}
+        {showProgress && (
+          <div className='progress'>
+            <CircularProgress color='primary' />
+          </div>
+        )}
       </div>
       <div>
         {errorMessages.map((error, index) => (

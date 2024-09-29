@@ -1,7 +1,16 @@
 import './SelectOwl.scss';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Button, FormControl, MenuItem, Select } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
+  LinearProgress,
+  MenuItem,
+  Select,
+  Stack,
+} from '@mui/material';
 import { tryToExecute } from '../../api/execute.js';
 import { useError } from '../../hooks/error.jsx';
 
@@ -86,6 +95,7 @@ const SelectOwl = () => {
   const { showError, ErrorSnackbar } = useError();
   const [scenarios, setScenarios] = useState([]);
   const [selectedScenario, setSelectedScenario] = useState('');
+  const [showProgress, setShowProgress] = useState(false);
 
   useEffect(() => {
     const fetchOwlScenarios = async () => {
@@ -113,12 +123,14 @@ const SelectOwl = () => {
   };
 
   const tryToExecuteScenario = async () => {
+    setShowProgress(() => true);
     try {
       const data = {
         scenario: selectedScenario,
       };
       const response = await tryToExecute(data);
       const result = await response.json();
+      setShowProgress(() => false);
       //const result = {message: 'successful', data: mockedResult}
 
       if (result.message === 'successful') {
@@ -127,6 +139,7 @@ const SelectOwl = () => {
         navigate('/scenario-problems', { state: { data: result.data } });
       }
     } catch (error) {
+      setShowProgress(() => false);
       showError(error.message);
       console.error('Error executing OWL:', error);
     }
@@ -154,16 +167,23 @@ const SelectOwl = () => {
           </Select>
         </FormControl>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-        <Button
-          variant='outlined'
-          color='primary'
-          size={'extraLarge'}
-          onClick={tryToExecuteScenario}
-        >
-          Execute Scenario
-        </Button>
-      </Box>
+      {!showProgress && (
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Button
+            variant='outlined'
+            color='primary'
+            size={'extraLarge'}
+            onClick={tryToExecuteScenario}
+          >
+            Execute Scenario
+          </Button>
+        </Box>
+      )}
+      {showProgress && (
+        <div className='progress'>
+          <CircularProgress color='primary' size={50} />
+        </div>
+      )}
       <ErrorSnackbar />
     </div>
   );
