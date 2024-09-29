@@ -1,21 +1,21 @@
-.greeting{
+.greeting {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 6.5rem;
   margin-bottom: 0;
-  h1{
+  h1 {
     margin-bottom: 6.5rem;
   }
-  .buttons{
+  .buttons {
     display: flex;
-    & > *{
-      &:not(:last-child){
+    & > * {
+      &:not(:last-child) {
         margin-right: 5rem;
       }
     }
   }
-  .background{
+  .background {
     align-self: flex-end;
     justify-self: flex-end;
   }
