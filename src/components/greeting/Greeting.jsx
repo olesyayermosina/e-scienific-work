@@ -1,17 +1,29 @@
 import {Button} from "@mui/material";
 import './Greeting.scss';
 import background from "../../assets/4672550_2476842 1.svg"
+import {useNavigate} from "react-router-dom";
+
 const Greeting = () => {
-    return(
+    const navigate = useNavigate();
+
+    const navigateToNewScenario = () => {
+        navigate('/create-scenario');
+    };
+
+    const navigateToSelectScenario = () => {
+        navigate('/select-scenario');
+    };
+
+    return (
         <div className="greeting">
             <h1>
                 Let`s get started!
             </h1>
             <div className={'buttons'}>
-                <Button variant={"outlined"} color={"primary"} size={"extraLarge"}>
+                <Button onClick={navigateToNewScenario} variant={"outlined"} color={"primary"} size={"extraLarge"}>
                     Create new scenario
                 </Button>
-                <Button variant={"outlined"} color={"secondary"} size={"extraLarge"} >
+                <Button onClick={navigateToSelectScenario} variant={"outlined"} color={"secondary"} size={"extraLarge"} >
                     Select from existing
                 </Button>
             </div>

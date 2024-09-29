@@ -10,11 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@bpmn-io/properties-panel": "^3.24.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.0",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.7",
+    "bpmn-js": "^17.11.1",
+    "bpmn-js-properties-panel": "^5.25.0",
+    "camunda-bpmn-moddle": "^7.0.1",
+    "min-dash": "^4.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

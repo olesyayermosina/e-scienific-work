@@ -1,0 +1,26 @@
+.finish-convertation {
+  width: 80%;
+  margin: 0 auto 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    margin: 60px 0 120px;
+    text-align: center;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 40px;
+
+    a {
+      color: #93867F;
+      padding-bottom: 1px;
+      border-bottom: 1px solid #93867F;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-$font-h1: bold 4.2667rem "Roboto", sans-serif;
+$font-h1: bold 32px "Roboto", sans-serif;
 $font-h2: 3.2rem bold "Roboto", sans-serif;
 $font-plain: 1.4rem  "Roboto", sans-serif;
 $font-link: 1.8667rem underlined "Roboto", sans-serif;
@@ -34,4 +34,8 @@ button{
 
 p {
     font: $font-plain;
+}
+
+a {
+    text-decoration: none;
 }
