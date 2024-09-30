@@ -115,11 +115,12 @@ const BPMNDiagram = ({ diagramXml, createNewMode }) => {
   const saveAndConvertToOwl = async () => {
     setShowProgress(() => true);
     try {
-      const { xml } = await modelerRef.current.saveXML({ format: true });
-      const response = await sendXmlAndConvert(xml);
-      await response.json();
+      //const { xml } = await modelerRef.current.saveXML({ format: true });
+      //const response = await sendXmlAndConvert(xml);
+      //const result = response.json();
+      const result = 'owl to save';
       setShowProgress(() => false);
-      navigate('/scenario-converted');
+      navigate('/scenario-converted', { state: { data: result.data } });
     } catch (error) {
       setShowProgress(() => false);
       handleNewError(error.message);
@@ -287,9 +288,10 @@ const BPMNDiagram = ({ diagramXml, createNewMode }) => {
             <Alert
               severity='error'
               sx={{
+                width: '500px',
                 display: 'flex',
                 alignItems: 'center',
-                fontSize: '14px',
+                fontSize: '12px',
                 mb: 2,
               }}
               action={

@@ -27,8 +27,8 @@ export const useError = () => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          fontSize: '14px',
-          width: '100%',
+          fontSize: '12px',
+          width: '500px',
         }}
       >
         {errorMessage}

@@ -128,10 +128,10 @@ const SelectOwl = () => {
       const data = {
         scenario: selectedScenario,
       };
-      const response = await tryToExecute(data);
-      const result = await response.json();
+      //const response = await tryToExecute(data);
+      //const result = await response.json();
       setShowProgress(() => false);
-      //const result = {message: 'successful', data: mockedResult}
+      const result = { message: 'successful', data: mockedResult };
 
       if (result.message === 'successful') {
         navigate('/scenario-finished', { state: { data: result.data } });
